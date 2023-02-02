@@ -24,8 +24,23 @@ function draw(coordinates) {
   context.fillRect(coordinates.x, coordinates.y, GRID_SIZE, GRID_SIZE);
 }
 
+const onClickTarget = ( coordinates ) => ( event ) => {
+  let x = event.offsetX;
+  let y = event.offsetY;
+  const checkHitX = x >= coordinates.x && x <= coordinates.x + GRID_SIZE
+  const checkHitY = y >= coordinates.y && y <= coordinates.y + GRID_SIZE
+  if(checkHitX && checkHitY){
+    console.log("true")
+  } else{
+    console.log('miss')
+  }
+}
+
 function onAppReady() {
   const coordinates = getCooradinates()
+  const gameField = document.getElementById('game')
+  gameField.addEventListener('click', onClickTarget(coordinates))
+
   draw(coordinates)
 }
 
