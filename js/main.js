@@ -3,6 +3,8 @@ const context = canvas.getContext('2d');
 const CANVAS_WIDTH = 960;
 const CANVAS_HEIGHT = 640;
 const GRID_SIZE = 16;
+let coordinates = { x: 0, y: 0 }
+let score = 0
 
 
 function getRandomInt(min, max){
@@ -24,24 +26,44 @@ function draw(coordinates) {
   context.fillRect(coordinates.x, coordinates.y, GRID_SIZE, GRID_SIZE);
 }
 
-const onClickTarget = ( coordinates ) => ( event ) => {
-  let x = event.offsetX;
-  let y = event.offsetY;
-  const checkHitX = x >= coordinates.x && x <= coordinates.x + GRID_SIZE
-  const checkHitY = y >= coordinates.y && y <= coordinates.y + GRID_SIZE
+function removeTarget(coordinates){
+  context.clearRect(coordinates.x, coordinates.y, GRID_SIZE, GRID_SIZE)
+}
+
+const onClickTarget = ( event ) => {
+  let checkResult = checkHit(coordinates, {x: event.offsetX, y: event.offsetY})
+  if (checkResult){
+    score ++
+    renderTarget()
+  }
+}
+
+function renderTarget(){
+  removeTarget(coordinates)
+  coordinates = getCooradinates()
+  draw(coordinates)
+}
+
+function gameProcess(){
+  renderTarget()
+}
+
+function checkHit (target, click){
+  let x = click.x;
+  let y = click.y;
+  const checkHitX = x >= target.x && x <= target.x + GRID_SIZE
+  const checkHitY = y >= target.y && y <= target.y + GRID_SIZE
   if(checkHitX && checkHitY){
-    console.log("true")
+    return true 
   } else{
-    console.log('miss')
+    return false
   }
 }
 
 function onAppReady() {
-  const coordinates = getCooradinates()
   const gameField = document.getElementById('game')
-  gameField.addEventListener('click', onClickTarget(coordinates))
-
-  draw(coordinates)
+  gameField.addEventListener('click', onClickTarget)
+  gameProcess()
 }
 
 document.addEventListener('DOMContentLoaded', onAppReady);
