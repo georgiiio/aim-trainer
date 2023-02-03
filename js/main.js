@@ -34,9 +34,13 @@ const onClickTarget = ( event ) => {
   let checkResult = checkHit(coordinates, {x: event.offsetX, y: event.offsetY})
   if (checkResult){
     score ++
-    document.querySelector('#counter').innerHTML = score
+    renderScore()
     renderTarget()
   }
+}
+
+function renderScore(){
+  document.querySelector('#counter').innerHTML = score
 }
 
 function renderTarget(){

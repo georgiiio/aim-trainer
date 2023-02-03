@@ -11,7 +11,7 @@ canvas {
   border: 1px solid white;
 }
 
-.gameScore {
+.game-score {
   display: flex;
   font-family: 'Rubik One', sans-serif;
   font-size: 20px;
