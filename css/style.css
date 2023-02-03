@@ -10,3 +10,16 @@ body {
 canvas {
   border: 1px solid white;
 }
+
+.game-score {
+  display: flex;
+  font-family: 'Rubik One', sans-serif;
+  font-size: 20px;
+  text-transform: uppercase;
+  color: white;
+  margin: 20px 30px;
+}
+
+#counter{
+  margin: 0 10px;
+}
