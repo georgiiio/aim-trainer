@@ -23,3 +23,9 @@ canvas {
 #counter{
   margin: 0 10px;
 }
+
+#timer{
+  margin: 0 10px;
+  font-size: 20px;
+  color: white;
+}
