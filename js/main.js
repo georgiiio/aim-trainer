@@ -5,7 +5,7 @@ const CANVAS_HEIGHT = 640;
 const GRID_SIZE = 16;
 let coordinates = { x: 0, y: 0 }
 let score = 0
-
+let seconds = 60
 
 function getRandomInt(min, max){
   const includesMax = max + 1
@@ -51,6 +51,7 @@ function renderTarget(){
 
 function gameProcess(){
   renderTarget()
+  makeIteration()
 }
 
 function checkHit (target, click){
@@ -65,9 +66,21 @@ function checkHit (target, click){
   }
 }
 
+const makeIteration = () => {
+  if (seconds > 0) {
+    document.querySelector('#timer').innerHTML = seconds
+    setTimeout(makeIteration, 1000)
+  } else if (seconds === 0){
+    swal( `Your score ${score}`)
+  }
+  seconds -= 1
+}
+
 function onAppReady() {
   const gameField = document.getElementById('game')
+
   gameField.addEventListener('click', onClickTarget)
+
   gameProcess()
 }
 
