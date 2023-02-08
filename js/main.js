@@ -51,6 +51,7 @@ function renderTarget(){
 
 function gameProcess(){
   renderTarget()
+  makeIteration()
 }
 
 function checkHit (target, click){
@@ -67,8 +68,8 @@ function checkHit (target, click){
 
 const makeIteration = () => {
   if (seconds > 0) {
-    setTimeout(makeIteration, 1000)
     document.querySelector('#timer').innerHTML = seconds
+    setTimeout(makeIteration, 1000)
   } else if (seconds === 0){
     swal( `Your score ${score}`)
   }
@@ -80,7 +81,6 @@ function onAppReady() {
 
   gameField.addEventListener('click', onClickTarget)
 
-  makeIteration()
   gameProcess()
 }
 
